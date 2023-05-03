@@ -4,24 +4,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { NavigationContainer } from '@react-navigation/native';
 import ProfileScreen from './components/Screens/ProfileScreen';
+import HomeScreen from './components/Screens/HomeScreen'
+import SettingsScreen from './components/Screens/SettingsScreen'
 
 const Tab = createBottomTabNavigator();
-
-function HomeScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>Home Screen</Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>Settings Screen</Text>
-    </View>
-  );
-}
 
 function CustomTabBar({ state, descriptors, navigation }) {
   return (
