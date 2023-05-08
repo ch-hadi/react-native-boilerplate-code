@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { StyleSheet, Text, View,TouchableOpacity } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -11,6 +11,8 @@ import LikeScreen from './src/Screens/LikeScreen';
 const Tab = createBottomTabNavigator();
 
 function CustomTabBar({ state, descriptors, navigation }) {
+  const [activeTab, setActiveTab] = useState(0);
+
   return (
     <View style={styles.tabBar}>
       {state.routes.map((route, index) => {
@@ -28,6 +30,7 @@ function CustomTabBar({ state, descriptors, navigation }) {
 
           if (!isFocused && !event.defaultPrevented) {
             navigation.navigate(route.name);
+             setActiveTab(index);
           }
         };
 
@@ -60,10 +63,10 @@ function CustomTabBar({ state, descriptors, navigation }) {
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={styles.tabBarItem}
+            style={[styles.tabBarItem,{ backgroundColor: activeTab === index ? 'red' : 'black' }]}
           >
-            <Ionicons name={iconName} size={24} color={isFocused ? 'blue' : 'gray'} />
-            <Text style={{ color: isFocused ? 'blue' : 'gray' }}>{label}</Text>
+            <Ionicons name={iconName} size={24} color={isFocused ? 'white' : 'gray'} />
+            {/* <Text style={{ color: isFocused ? 'white' : 'gray' }}>{label}</Text> */}
           </TouchableOpacity>
         );
       })}
@@ -97,12 +100,17 @@ const styles = StyleSheet.create({
   tabBar: {
     flexDirection: 'row',
     height: '12%',
-    backgroundColor: 'white', // Set the backgroundColor of the custom tab bar herema
-    paddingBottom:10
+    backgroundColor: 'black', // Set the backgroundColor of the custom tab bar herema
+    borderTopLeftRadius:20,
+    borderTopRightRadius:20
+
   },
   tabBarItem: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    // backgroundColor:'black',
+    // borderTopLeftRadius:20,
+    // borderTopRightRadius:20
   },
 });
